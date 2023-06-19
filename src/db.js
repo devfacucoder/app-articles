@@ -1,13 +1,20 @@
 import { connect } from "mongoose";
-const url = `mongodb+srv://facucoder:VIa8MmkKWfssXsev@cluster0.frkwplz.mongodb.net/apparticles?retryWrites=true&w=majority`
-const connDB = connect(url, {
+
+// Import the dotenv module to load environment variables from a .env file
+import dotenv from "dotenv";
+dotenv.config();
+
+// Establish a connection to the database using the URL from the environment variables
+const connDB = connect(process.env.URL_CONNECT_DB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
   .then(() => {
-    console.log("Conexión exitosa a la base de datos");
+    console.log("Successfully connected to the database");
   })
   .catch((error) => {
-    console.error("Error de conexión a la base de datos", error);
+    console.error("Error connecting to the database", error);
   });
-export { connDB};
+
+// Export the connDB variable to make it available for other parts of the application
+export { connDB };
